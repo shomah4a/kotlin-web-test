@@ -37,6 +37,9 @@ dependencies {
 
     implementation("io.github.config4k", "config4k", "0.4.1")
 
+    // https://mvnrepository.com/artifact/org.springframework/spring-webmvc
+    implementation("org.springframework", "spring-webmvc", "5.2.5.RELEASE")
+
     // Use the Kotlin test library.
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 
@@ -63,4 +66,4 @@ compileTestKotlin.kotlinOptions {
 gretty {
     httpPort = 8888
     recompileOnSourceChange = true
-}
+ }
