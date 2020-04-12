@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletResponse
 @WebServlet(name = "hello", urlPatterns = ["/hello"])
 class Test : HttpServlet() {
 
-    override fun doGet(req: HttpServletRequest?, resp: HttpServletResponse?) {
-        resp?.contentType = "text/plain; charset=UTF-8"
-        resp?.writer?.println("hello, kotlin")
+    override fun doGet(req: HttpServletRequest, resp: HttpServletResponse) {
+        resp.contentType = "text/plain; charset=UTF-8"
+        resp.writer?.println("hello, kotlin")
     }
 }
