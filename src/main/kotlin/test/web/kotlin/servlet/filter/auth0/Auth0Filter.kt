@@ -1,4 +1,4 @@
-package test.web.kotlin.servlet.auth0
+package test.web.kotlin.servlet.filter.auth0
 
 import test.web.kotlin.di.Container
 import javax.servlet.*
