@@ -35,6 +35,8 @@ dependencies {
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
     implementation("org.slf4j", "slf4j-api","1.7.25")
 
+    implementation("io.github.config4k", "config4k", "0.4.1")
+
     // Use the Kotlin test library.
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 
