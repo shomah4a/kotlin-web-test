@@ -11,6 +11,8 @@ plugins {
     id("java")
     id("war")
     id("org.gretty") version "3.0.2"
+    id("org.seasar.doma.compile") version "1.0.0"
+    kotlin("kapt") version "1.3.71"
 
     // Apply the application plugin to add support for building a CLI application.
     application
@@ -36,6 +38,13 @@ dependencies {
     implementation("org.slf4j", "slf4j-api","1.7.25")
 
     implementation("io.github.config4k", "config4k", "0.4.1")
+
+    // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
+    implementation("org.xerial", "sqlite-jdbc", "3.30.1")
+
+    // https://mvnrepository.com/artifact/org.seasar.doma/doma
+    kapt("org.seasar.doma:doma:2.29.0")
+    implementation("org.seasar.doma:doma:2.29.0")
 
     // https://mvnrepository.com/artifact/org.springframework/spring-webmvc
     implementation("org.springframework", "spring-webmvc", "5.2.5.RELEASE")
@@ -66,4 +75,10 @@ compileTestKotlin.kotlinOptions {
 gretty {
     httpPort = 8888
     recompileOnSourceChange = true
- }
+}
+
+task("domaTest") {
+    application {
+        mainClassName = "test.web.kotlin.DomaTestKt"
+    }
+}
