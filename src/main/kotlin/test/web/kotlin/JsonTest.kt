@@ -1,5 +1,7 @@
 package test.web.kotlin
 
+import com.fasterxml.jackson.annotation.JsonAlias
+import com.fasterxml.jackson.annotation.JsonAutoDetect
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
@@ -12,28 +14,36 @@ class JsonTest {
             val mapper = jacksonObjectMapper()
             val req = mapper.readValue<BidRequest>(sampleRequest)
 
-            println("hogehoge")
             println(req)
+
+            try {
+                mapper.readValue<BidRequest>(errorRequest)
+            } catch (e: Throwable) {
+                e.printStackTrace()
+            }
         }
     }
 }
 
 
+@JsonAutoDetect
 data class Device(
-        @JsonProperty("ua") val ua: String?,
-        @JsonProperty("type")val type: String
+        val ua: String?,
+        val type: String
 )
 
+@JsonAutoDetect
 data class Medium(
-        @JsonProperty("domain") val domain: String?
+        val domain: String?
 )
 
+
+@JsonAutoDetect
 data class BidRequest(
-        @JsonProperty("id") val id: String,
-        @JsonProperty("medium") val medium: Medium?,
-        @JsonProperty("device") val device: Device
+        val id: String,
+        val medium: Medium?,
+        val device: Device
 )
-
 
 val sampleRequest = """
 {
@@ -46,4 +56,26 @@ val sampleRequest = """
     }
 }
 """.trimIndent()
+
+
+// no id
+val errorRequest = """
+{
+    "medium": {
+        "domain": "google.com"
+    },
+    "device": {
+        "type": "dooh"
+    }
+}    
+""".trimIndent()
+
+interface Hoge {
+    val id: String
+    val name: String
+}
+
+data class Fuga(override val id: String, override val name: String): Hoge {
+
+}
 
