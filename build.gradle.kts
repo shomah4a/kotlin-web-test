@@ -49,6 +49,8 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework/spring-webmvc
     implementation("org.springframework", "spring-webmvc", "5.2.5.RELEASE")
 
+    implementation("com.fasterxml.jackson.module", "jackson-module-kotlin", "2.11.0")
+
     // Use the Kotlin test library.
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 
@@ -63,6 +65,7 @@ application {
     // Define the main class for the application.
     mainClassName = "test.web.kotlin.AppKt"
 }
+
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
     jvmTarget = "11"
@@ -77,8 +80,12 @@ gretty {
     recompileOnSourceChange = true
 }
 
-task("domaTest") {
-    application {
-        mainClassName = "test.web.kotlin.DomaTestKt"
-    }
+task("domaTest",  JavaExec::class) {
+    classpath = sourceSets.main.get().runtimeClasspath
+    main = "test.web.kotlin.DomaTestKt"
+}
+
+task("jsonTest",  JavaExec::class) {
+    classpath = sourceSets.main.get().runtimeClasspath
+    main = "test.web.kotlin.JsonTest"
 }
